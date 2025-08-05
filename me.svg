@@ -1,0 +1,337 @@
+<svg width="800" height="660" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Color shifting gradients for tiles -->
+    <linearGradient id="tile1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:0.8">
+        <animate attributeName="stop-color" values="#ff6b6b;#4ecdc4;#45b7d1;#96ceb4;#feca57;#ff6b6b" dur="8s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" style="stop-color:#4ecdc4;stop-opacity:0.8">
+        <animate attributeName="stop-color" values="#4ecdc4;#45b7d1;#96ceb4;#feca57;#ff6b6b;#4ecdc4" dur="8s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    
+    <linearGradient id="tile2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#45b7d1;stop-opacity:0.8">
+        <animate attributeName="stop-color" values="#45b7d1;#96ceb4;#feca57;#ff6b6b;#4ecdc4;#45b7d1" dur="10s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" style="stop-color:#96ceb4;stop-opacity:0.8">
+        <animate attributeName="stop-color" values="#96ceb4;#feca57;#ff6b6b;#4ecdc4;#45b7d1;#96ceb4" dur="10s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    
+    <linearGradient id="tile3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#96ceb4;stop-opacity:0.8">
+        <animate attributeName="stop-color" values="#96ceb4;#feca57;#ff6b6b;#4ecdc4;#45b7d1;#96ceb4" dur="12s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" style="stop-color:#feca57;stop-opacity:0.8">
+        <animate attributeName="stop-color" values="#feca57;#ff6b6b;#4ecdc4;#45b7d1;#96ceb4;#feca57" dur="12s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    
+    <linearGradient id="tile4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#feca57;stop-opacity:0.8">
+        <animate attributeName="stop-color" values="#feca57;#ff6b6b;#4ecdc4;#45b7d1;#96ceb4;#feca57" dur="9s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:0.8">
+        <animate attributeName="stop-color" values="#ff6b6b;#4ecdc4;#45b7d1;#96ceb4;#feca57;#ff6b6b" dur="9s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+    
+    <linearGradient id="tile5" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4ecdc4;stop-opacity:0.8">
+        <animate attributeName="stop-color" values="#4ecdc4;#45b7d1;#96ceb4;#feca57;#ff6b6b;#4ecdc4" dur="6s" repeatCount="indefinite"/>
+      </stop>
+      <stop offset="100%" style="stop-color:#45b7d1;stop-opacity:0.8">
+        <animate attributeName="stop-color" values="#45b7d1;#96ceb4;#feca57;#ff6b6b;#4ecdc4;#45b7d1" dur="6s" repeatCount="indefinite"/>
+      </stop>
+    </linearGradient>
+
+    <!-- White glow filter for popup tiles -->
+    <filter id="whiteGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feColorMatrix in="coloredBlur" values="1 1 1 1 0 1 1 1 1 0 1 1 1 1 0 0 0 0 0.8 0"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Balanced Glassmorphism filter with subtle blur -->
+    <filter id="glassmorphism" x="-30%" y="-30%" width="160%" height="160%">
+      <!-- Create balanced blur layers -->
+      <feGaussianBlur stdDeviation="6" result="lightBlur"/>
+      <feGaussianBlur stdDeviation="12" result="heavyBlur"/>
+      <feGaussianBlur stdDeviation="20" result="extremeBlur"/>
+      
+      <!-- Create radial mask for center-to-edge gradient -->
+      <feFlood flood-color="#ffffff" flood-opacity="1" result="white"/>
+      <feComposite in="white" in2="SourceGraphic" operator="in" result="mask"/>
+      
+      <!-- Blend different blur levels subtly -->
+      <feComposite in="lightBlur" in2="mask" operator="over" result="centerBlur"/>
+      <feComposite in="heavyBlur" in2="centerBlur" operator="multiply" result="midBlur"/>
+      <feComposite in="extremeBlur" in2="midBlur" operator="screen" result="edgeBlur"/>
+      
+      <!-- Add subtle frosted glass transparency -->
+      <feColorMatrix in="edgeBlur" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 0.2 0" result="frostedGlass"/>
+      
+      <!-- Add subtle depth with shadow -->
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.2" result="shadow"/>
+      
+      <!-- Combine all effects -->
+      <feMerge>
+        <feMergeNode in="shadow"/>
+        <feMergeNode in="frostedGlass"/>
+      </feMerge>
+    </filter>
+
+    <!-- Drop shadow filter -->
+    <filter id="dropshadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="2" dy="2" result="offset"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <!-- Text gradient -->
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    
+    <!-- Intensified radial gradient for stronger glassmorphism fog effect -->
+    <radialGradient id="fogGradient" cx="50%" cy="50%" r="70%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.04"/>
+      <stop offset="20%" style="stop-color:#ffffff;stop-opacity:0.15"/>
+      <stop offset="40%" style="stop-color:#ffffff;stop-opacity:0.25"/>
+      <stop offset="65%" style="stop-color:#ffffff;stop-opacity:0.35"/>
+      <stop offset="85%" style="stop-color:#ffffff;stop-opacity:0.45"/>
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.50"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Black background -->
+  <rect width="800" height="660" fill="#000000"/>
+
+  <!-- Purple streak effect using gradient layers -->
+  <defs>
+    <!-- Animated diagonal purple gradient with mostly transparent area -->
+    <linearGradient id="purpleStreakGradient1" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:0"/>
+      <stop offset="40%" style="stop-color:#000000;stop-opacity:0"/>
+      <stop offset="45%" style="stop-color:#8a2be2;stop-opacity:0.3"/>
+      <stop offset="50%" style="stop-color:#ba55d3;stop-opacity:0.6"/>
+      <stop offset="55%" style="stop-color:#9932cc;stop-opacity:0.3"/>
+      <stop offset="60%" style="stop-color:#000000;stop-opacity:0"/>
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0"/>
+      <animateTransform attributeName="gradientTransform" values="translate(-200,-200);translate(200,200);translate(-200,-200)" dur="8s" repeatCount="indefinite"/>
+    </linearGradient>
+    
+    <!-- Second animated gradient for layered effect with narrow purple streak -->
+    <linearGradient id="purpleStreakGradient2" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:0"/>
+      <stop offset="42%" style="stop-color:#000000;stop-opacity:0"/>
+      <stop offset="47%" style="stop-color:#9932cc;stop-opacity:0.2"/>
+      <stop offset="53%" style="stop-color:#ba55d3;stop-opacity:0.4"/>
+      <stop offset="58%" style="stop-color:#000000;stop-opacity:0"/>
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0"/>
+      <animateTransform attributeName="gradientTransform" values="translate(-150,-150);translate(250,250);translate(-150,-150)" dur="10s" begin="2s" repeatCount="indefinite"/>
+    </linearGradient>
+    
+    <!-- Blue streak gradients moving from bottom-left to top-right -->
+    <linearGradient id="blueStreakGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:0"/>
+      <stop offset="40%" style="stop-color:#000000;stop-opacity:0"/>
+      <stop offset="45%" style="stop-color:#1e90ff;stop-opacity:0.3"/>
+      <stop offset="50%" style="stop-color:#00bfff;stop-opacity:0.6"/>
+      <stop offset="55%" style="stop-color:#4169e1;stop-opacity:0.3"/>
+      <stop offset="60%" style="stop-color:#000000;stop-opacity:0"/>
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0"/>
+      <animateTransform attributeName="gradientTransform" values="translate(-200,200);translate(200,-200);translate(-200,200)" dur="9s" begin="4s" repeatCount="indefinite"/>
+    </linearGradient>
+    
+    <!-- Second blue animated gradient for layered effect -->
+    <linearGradient id="blueStreakGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:0"/>
+      <stop offset="42%" style="stop-color:#000000;stop-opacity:0"/>
+      <stop offset="47%" style="stop-color:#4169e1;stop-opacity:0.2"/>
+      <stop offset="53%" style="stop-color:#00bfff;stop-opacity:0.4"/>
+      <stop offset="58%" style="stop-color:#000000;stop-opacity:0"/>
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0"/>
+      <animateTransform attributeName="gradientTransform" values="translate(-150,150);translate(250,-250);translate(-150,150)" dur="11s" begin="6s" repeatCount="indefinite"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Purple streak layers between background and tiles -->
+  <rect width="800" height="660" fill="url(#purpleStreakGradient1)" opacity="0.7"/>
+  <rect width="800" height="660" fill="url(#purpleStreakGradient2)" opacity="0.5"/>
+  
+  <!-- Blue streak layers moving from bottom-left to top-right -->
+  <rect width="800" height="660" fill="url(#blueStreakGradient1)" opacity="0.6"/>
+  <rect width="800" height="660" fill="url(#blueStreakGradient2)" opacity="0.4"/>
+
+  <!-- Animated tile grid (5 rows x 6 columns = 30 tiles) -->
+  <g>
+    <!-- Row 1 -->
+    <rect x="14" y="10" width="120" height="120" rx="10" fill="url(#tile1)" opacity="0.8"/>
+    <rect x="144" y="10" width="120" height="120" rx="10" fill="url(#tile2)" opacity="0.7"/>
+    <rect x="274" y="10" width="120" height="120" rx="10" fill="url(#tile3)" opacity="0.6"/>
+    <rect x="404" y="10" width="120" height="120" rx="10" fill="url(#tile4)" opacity="0.9"/>
+    <rect x="534" y="10" width="120" height="120" rx="10" fill="url(#tile5)" opacity="0.8"/>
+    <rect x="664" y="10" width="120" height="120" rx="10" fill="url(#tile1)" opacity="0.7"/>
+    
+    <!-- Row 2 -->
+    <rect x="14" y="140" width="120" height="120" rx="10" fill="url(#tile3)" opacity="0.7"/>
+    <rect x="144" y="140" width="120" height="120" rx="10" fill="url(#tile1)" opacity="0.8"/>
+    <rect x="274" y="140" width="120" height="120" rx="10" fill="url(#tile5)" opacity="0.6"/>
+    <rect x="404" y="140" width="120" height="120" rx="10" fill="url(#tile2)" opacity="0.9"/>
+    <rect x="534" y="140" width="120" height="120" rx="10" fill="url(#tile4)" opacity="0.7"/>
+    <rect x="664" y="140" width="120" height="120" rx="10" fill="url(#tile3)" opacity="0.8"/>
+    
+    <!-- Row 3 -->
+    <rect x="14" y="270" width="120" height="120" rx="10" fill="url(#tile5)" opacity="0.6"/>
+    <rect x="144" y="270" width="120" height="120" rx="10" fill="url(#tile4)" opacity="0.7"/>
+    <rect x="274" y="270" width="120" height="120" rx="10" fill="url(#tile2)" opacity="0.8"/>
+    <rect x="404" y="270" width="120" height="120" rx="10" fill="url(#tile1)" opacity="0.9"/>
+    <rect x="534" y="270" width="120" height="120" rx="10" fill="url(#tile3)" opacity="0.7"/>
+    <rect x="664" y="270" width="120" height="120" rx="10" fill="url(#tile5)" opacity="0.8"/>
+    
+    <!-- Row 4 -->
+    <rect x="14" y="400" width="120" height="120" rx="10" fill="url(#tile2)" opacity="0.8"/>
+    <rect x="144" y="400" width="120" height="120" rx="10" fill="url(#tile3)" opacity="0.7"/>
+    <rect x="274" y="400" width="120" height="120" rx="10" fill="url(#tile1)" opacity="0.6"/>
+    <rect x="404" y="400" width="120" height="120" rx="10" fill="url(#tile5)" opacity="0.9"/>
+    <rect x="534" y="400" width="120" height="120" rx="10" fill="url(#tile4)" opacity="0.8"/>
+    <rect x="664" y="400" width="120" height="120" rx="10" fill="url(#tile2)" opacity="0.7"/>
+    
+    <!-- Row 5 -->
+    <rect x="14" y="530" width="120" height="120" rx="10" fill="url(#tile4)" opacity="0.7"/>
+    <rect x="144" y="530" width="120" height="120" rx="10" fill="url(#tile5)" opacity="0.8"/>
+    <rect x="274" y="530" width="120" height="120" rx="10" fill="url(#tile3)" opacity="0.6"/>
+    <rect x="404" y="530" width="120" height="120" rx="10" fill="url(#tile2)" opacity="0.9"/>
+    <rect x="534" y="530" width="120" height="120" rx="10" fill="url(#tile1)" opacity="0.7"/>
+    <rect x="664" y="530" width="120" height="120" rx="10" fill="url(#tile4)" opacity="0.8"/>
+
+    <!-- Add popup animations with updated positions -->
+    <rect x="274" y="10" width="120" height="120" rx="10" fill="url(#tile3)" opacity="0.9" filter="url(#whiteGlow)">
+      <animateTransform attributeName="transform" values="translate(0,0) scale(1);translate(0,-8) scale(1.05);translate(0,0) scale(1)" dur="6s" repeatCount="indefinite"/>
+    </rect>
+    
+    <rect x="534" y="530" width="120" height="120" rx="10" fill="url(#tile1)" opacity="0.9" filter="url(#whiteGlow)">
+      <animateTransform attributeName="transform" values="translate(0,0) scale(1);translate(0,-6) scale(1.03);translate(0,0) scale(1)" dur="8s" begin="2s" repeatCount="indefinite"/>
+    </rect>
+    
+    <rect x="144" y="400" width="120" height="120" rx="10" fill="url(#tile3)" opacity="0.8" filter="url(#whiteGlow)">
+      <animateTransform attributeName="transform" values="translate(0,0) scale(1);translate(0,-5) scale(1.04);translate(0,0) scale(1)" dur="7s" begin="4s" repeatCount="indefinite"/>
+    </rect>
+    
+    <rect x="664" y="270" width="120" height="120" rx="10" fill="url(#tile5)" opacity="0.8" filter="url(#whiteGlow)">
+      <animateTransform attributeName="transform" values="translate(0,0) scale(1);translate(0,-4) scale(1.02);translate(0,0) scale(1)" dur="9s" begin="6s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  
+  <!-- Content overlay with intensified glassmorphism effect - centered -->
+  <!-- Base intensified blur background for glassmorphism -->
+  <rect x="75" y="80" width="650" height="520" rx="30" fill="#ffffff" opacity="0.12" filter="url(#glassmorphism)"/>
+  
+  <!-- Intensified radial fog layer - center to edge gradient -->
+  <rect x="75" y="80" width="650" height="520" rx="30" fill="url(#fogGradient)" opacity="0.95"/>
+  
+  <!-- Additional intensified fog layers for depth -->
+  <rect x="78" y="82" width="644" height="516" rx="29" fill="rgba(255,255,255,0.15)" opacity="0.8" filter="url(#glassmorphism)"/>
+  <rect x="80" y="85" width="640" height="510" rx="28" fill="rgba(255,255,255,0.14)" opacity="0.75" filter="url(#glassmorphism)"/>
+  <rect x="85" y="90" width="630" height="500" rx="25" fill="rgba(255,255,255,0.12)" opacity="0.7" filter="url(#glassmorphism)"/>
+  <rect x="90" y="95" width="620" height="490" rx="22" fill="rgba(255,255,255,0.10)" opacity="0.6" filter="url(#glassmorphism)"/>
+  
+  <!-- Main glassmorphism card with intensified effect -->
+  <rect x="75" y="80" width="650" height="520" rx="30" fill="rgba(255,255,255,0.25)" stroke="#ffffff" stroke-width="4" opacity="0.95"/>
+  
+  <!-- Profile title -->
+  <text x="105" y="140" font-family="'Segoe UI', Arial, sans-serif" font-size="36" font-weight="bold" fill="#1a1a1a">
+    Hello! 👋
+  </text>
+  
+  <!-- Name -->
+  <text x="105" y="175" font-family="'Segoe UI', Arial, sans-serif" font-size="24" font-weight="300" fill="#2d2d2d" opacity="0.9">
+    I'm stdnt-c1
+  </text>
+  
+  <!-- Role/occupation -->
+  <text x="105" y="200" font-family="'Segoe UI', Arial, sans-serif" font-size="16" font-weight="400" fill="#404040" opacity="0.8">
+    Student &amp; Aspiring Developer
+  </text>
+  
+  <!-- Tech Stack Section -->
+  <text x="105" y="240" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="600" fill="#1a1a1a">
+    Tech Stack:
+  </text>
+  
+  <!-- JavaScript Badge with Logo -->
+  <g transform="translate(105, 260)">
+    <rect width="110" height="32" rx="16" fill="rgba(247,223,30,0.9)" stroke="#ffffff" stroke-width="1" opacity="0.9"/>
+    <circle cx="20" cy="16" r="10" fill="#000000" opacity="0.1"/>
+    <text x="18" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="12" font-weight="bold" fill="#000000" text-anchor="middle">JS</text>
+    <text x="65" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="500" fill="#000000" text-anchor="middle">
+      JavaScript
+    </text>
+  </g>
+  
+  <!-- C++ Badge with Logo -->
+  <g transform="translate(235, 260)">
+    <rect width="90" height="32" rx="16" fill="rgba(0,89,156,0.9)" stroke="#ffffff" stroke-width="1" opacity="0.9"/>
+    <circle cx="18" cy="16" r="10" fill="#ffffff" opacity="0.2"/>
+    <text x="18" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">C++</text>
+    <text x="58" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="500" fill="#ffffff" text-anchor="middle">
+      C++
+    </text>
+  </g>
+  
+  <!-- Python Badge with Logo -->
+  <g transform="translate(345, 260)">
+    <rect width="100" height="32" rx="16" fill="rgba(55,118,171,0.9)" stroke="#ffffff" stroke-width="1" opacity="0.9"/>
+    <circle cx="18" cy="16" r="10" fill="#ffd43b" opacity="0.8"/>
+    <text x="18" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="bold" fill="#3776ab" text-anchor="middle">PY</text>
+    <text x="65" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="500" fill="#ffffff" text-anchor="middle">
+      Python
+    </text>
+  </g>
+  
+  <!-- PowerShell Badge with Logo -->
+  <g transform="translate(465, 260)">
+    <rect width="120" height="32" rx="16" fill="rgba(83,145,254,0.9)" stroke="#ffffff" stroke-width="1" opacity="0.9"/>
+    <circle cx="20" cy="16" r="10" fill="#ffffff" opacity="0.2"/>
+    <text x="20" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">PS</text>
+    <text x="75" y="21" font-family="'Segoe UI', Arial, sans-serif" font-size="14" font-weight="500" fill="#ffffff" text-anchor="middle">
+      PowerShell
+    </text>
+  </g>
+  
+  <!-- Current Focus Section -->
+  <g transform="translate(105, 330)">
+    <text x="0" y="0" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="600" fill="#ffffff">
+      Current Focus:
+    </text>
+    <text x="0" y="25" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#2d2d2d" opacity="0.8">
+      🚀 Developing Hand-gesture oriented Computer-Vision Game Controller
+    </text>
+    <text x="0" y="45" font-family="'Segoe UI', Arial, sans-serif" font-size="12" fill="#0366d6" opacity="0.9">
+      🔗 https://github.com/stdnt-c1/A-Hand-For-A-Game.git
+    </text>
+  </g>
+  
+  <!-- GitHub Profile Section -->
+  <g transform="translate(475, 110)">
+    <circle cx="20" cy="20" r="18" fill="#ffffff" opacity="0.1"/>
+    <text x="20" y="28" font-family="'Segoe UI', Arial, sans-serif" font-size="16" fill="#2d2d2d" text-anchor="middle">
+      🐙
+    </text>
+    <text x="50" y="28" font-family="'Segoe UI', Arial, sans-serif" font-size="14" fill="#2d2d2d">
+      stdnt-c1
+    </text>
+  </g>
+</svg>
